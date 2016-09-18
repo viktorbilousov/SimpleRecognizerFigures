@@ -22,7 +22,7 @@ public class TestInputDrawer {
     private Graphics _graphic;
     private Color _backColor = Color.GRAY;
     private Color _figureColor = Color.white;
-    private String _fileName = "TestInput.bmp";
+   // private String _fileName = "TestInput.bmp";
 
     private int _widthImage;
     private int _heightImage;
@@ -65,8 +65,8 @@ public class TestInputDrawer {
 
     private void drawRandCyrcles(int cnt, ArrayList<Circle> listCircles, ArrayList<Rect> listRect)
     {
-        if(cnt <= 0 )
-            throw new IllegalArgumentException("cnt <= 0 !!!");
+        if(cnt < 0 )
+            throw new IllegalArgumentException("cnt < 0 !!!");
         Random rand = new Random();
         int x = -1;
         int y = -1;
@@ -127,8 +127,8 @@ public class TestInputDrawer {
 
     private void drawRandRect(int cnt, ArrayList<Circle> listCircles, ArrayList<Rect> listRect)
     {
-        if(cnt <= 0 )
-            throw new IllegalArgumentException("cnt <= 0 !!!");
+        if(cnt < 0 )
+            throw new IllegalArgumentException("cnt < 0 !!!");
 
         Random rand = new Random();
 
@@ -183,8 +183,9 @@ public class TestInputDrawer {
         for(Rect R : listRect) {
             _graphic.setColor(_figureColor);
             _graphic.fillRect(R.getX(), R.getY(), R.getWeight(), R.getHeight());
-            _graphic.setColor(Color.black);
-            _graphic.drawString((++num).toString(),R.getX(), R.getY());
+            num++;
+         //   _graphic.setColor(Color.black);
+         //   _graphic.drawString((++num).toString(),R.getX(), R.getY());
             System.out.println(num + " " + R.toString());
         }
 
@@ -200,7 +201,7 @@ public class TestInputDrawer {
     public void writeFile(String path)
     {
         try {
-            ImageIO.write(_image, "bmp", new File(path + _fileName));
+            ImageIO.write(_image, "bmp", new File(path));
             System.out.println("Success!");
         }
         catch (IOException e) {

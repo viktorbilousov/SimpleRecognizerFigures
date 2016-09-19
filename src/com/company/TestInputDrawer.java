@@ -2,17 +2,13 @@ package com.company;
 
 import com.company.Figures.Circle;
 import com.company.Figures.Rect;
-import com.sun.xml.internal.bind.CycleRecoverable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.*;
-import java.util.List;
 
 /**
  * Created by Belousov on 17.09.2016.
@@ -23,7 +19,10 @@ public class TestInputDrawer {
     private Color _backColor = Color.GRAY;
     private Color _figureColor = Color.white;
    // private String _fileName = "TestInput.bmp";
+    private boolean soutON = true;
 
+
+    private ArrayList<Circle> circles = new ArrayList<>();
     private int _widthImage;
     private int _heightImage;
 
@@ -34,6 +33,15 @@ public class TestInputDrawer {
     private final int MaxRecLeigth = 150;
     private final int MinRecLeigth = 20;
 
+    public void setSoutON(boolean value)
+    {
+        soutON = value;
+    }
+
+    public ArrayList<Circle> getListC()
+    {
+        return circles;
+    }
 
     public TestInputDrawer(int width, int height)
     {
@@ -61,6 +69,7 @@ public class TestInputDrawer {
 
         drawRandCyrcles(cntCyrcles, listCircles, listRect);
         drawRandRect(cntRectangles, listCircles, listRect);
+        this.circles = listCircles;
     }
 
     private void drawRandCyrcles(int cnt, ArrayList<Circle> listCircles, ArrayList<Rect> listRect)
@@ -90,8 +99,7 @@ public class TestInputDrawer {
 
             candidatCircle = new Circle(x,y,radius);
             for(Circle C : listCircles) { // пересечение с кругами
-               if(C.isCrossCircle(candidatCircle))
-               {
+               if(C.isCrossCircle(candidatCircle)){
                 //   System.out.println("circle ups...");
                    isAdd = false;
                    break;
@@ -100,8 +108,7 @@ public class TestInputDrawer {
 
             for(Rect R : listRect)
             {
-                if(candidatCircle.isCrossRect(R))
-                {
+                if(candidatCircle.isCrossRect(R)) {
                   //  System.out.println("circle ups...");
                     isAdd = false;
                     break;
@@ -121,7 +128,8 @@ public class TestInputDrawer {
         int num=0;
         for(Circle c : listCircles) {
             _graphic.fillOval(c.boundingBox.getX(), c.boundingBox.getY(), c.getRadius() * 2, c.getRadius() * 2);
-            System.out.println(++num + c.toString());
+            if(soutON)
+                System.out.println(++num + " " + c.toString());
         }
     }
 
@@ -182,11 +190,12 @@ public class TestInputDrawer {
         Integer num =0;
         for(Rect R : listRect) {
             _graphic.setColor(_figureColor);
-            _graphic.fillRect(R.getX(), R.getY(), R.getWeight(), R.getHeight());
+            _graphic.fillRect(R.getX(), R.getY(), R.getWight(), R.getHeight());
             num++;
          //   _graphic.setColor(Color.black);
          //   _graphic.drawString((++num).toString(),R.getX(), R.getY());
-            System.out.println(num + " " + R.toString());
+            if(soutON)
+                 System.out.println(num + " " + R.toString());
         }
 
     }
@@ -202,7 +211,8 @@ public class TestInputDrawer {
     {
         try {
             ImageIO.write(_image, "bmp", new File(path));
-            System.out.println("Success!");
+            if(soutON)
+                System.out.println("Success!");
         }
         catch (IOException e) {
             e.printStackTrace();

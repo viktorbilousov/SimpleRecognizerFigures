@@ -58,7 +58,7 @@ public class Circle extends Figures {
 
         int newX = R.getX() - radius;
         int newY = R.getY() - radius;
-        int newW = R.getWeight() + 2*radius;
+        int newW = R.getWight() + 2*radius;
         int newH = R.getHeight() + 2*radius;
 
         if(newX < 0 )
@@ -68,6 +68,15 @@ public class Circle extends Figures {
 
         Rect bigRect = new Rect(newX,newY,newW, newH);
         if(bigRect.isPointInside(centerCircle))
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Circle C = (Circle)obj;
+        if(centerX == C.centerX && centerY == C.centerY && radius == C.radius)
             return true;
 
         return false;
@@ -96,7 +105,7 @@ public class Circle extends Figures {
 
     @Override
     public String toString() {
-        String output = "Center = (" + centerX + " ; "+ centerY + ")" + "Radius = " + radius;
+        String output = "Center = (" + centerX + " ; "+ centerY + ")" + " Radius = " + radius;
         return output;
 
     }

@@ -14,7 +14,6 @@ public class Rect extends Figures {
     public int getX() {
         return _x;
     }
-
     public int getY() {
         return _y;
     }
@@ -22,7 +21,6 @@ public class Rect extends Figures {
     public int getWight() {
         return _wight;
     }
-
     public int getHeight() {
         return _height;
     }

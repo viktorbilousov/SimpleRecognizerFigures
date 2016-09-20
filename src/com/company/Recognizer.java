@@ -42,12 +42,6 @@ public class Recognizer {
         return new Color(_image.getRGB(x,y));
     }
 
-    public ArrayList<Circle> getCList()
-    {
-        return listCircles;
-    }
-
-
      public String start()
      {
          if(_image == null)
@@ -60,6 +54,7 @@ public class Recognizer {
          {
              for (int x = 0; x < _image.getWidth(); x += STEP) {
                  Color pixel = new Color(_image.getRGB(x,y));
+
                  if(pixel.equals(figureColor)) {
                    //  System.out.println("x = " + x + " y = " + y);
                      Point leftUp = findLeftUpPointFigure(x,y);
@@ -70,8 +65,7 @@ public class Recognizer {
                          try {
                               findC = bildCircle(leftUp.x, leftUp.y);
                          }
-                         catch (IllegalArgumentException E)
-                         {
+                         catch (IllegalArgumentException E) {
                              System.out.println(E.getMessage() + " leftUp : "+leftUp.toString() );
                          }
                          listCircles.add(findC);
@@ -79,31 +73,22 @@ public class Recognizer {
                          _graphic.fillOval(findC.boundingBox.getX(), findC.boundingBox.getY(),
                                  findC.getRadius() * 2, findC.getRadius() * 2);
                          if(writeSteps)
-                             writeFile("C:\\Users\\Belousov\\Documents\\Java projects\\SimpleRecognizerFigures\\Input\\Steps\\Step" + ++cnt + ".bmp");
+                             writeFile("Input\\Steps\\Step" + ++cnt + ".bmp");
                      }
+
                      if(figure.equals(Rect.class.getSimpleName())){
                          Rect findR = bildRec(leftUp.x, leftUp.y);
                          listRect.add(findR);
                          _graphic.setColor(backColor);
                          _graphic.fillRect(findR.getX(), findR.getY(), findR.getWight(), findR.getHeight());
                          if(writeSteps)
-                            writeFile("C:\\Users\\Belousov\\Documents\\Java projects\\SimpleRecognizerFigures\\Input\\Steps\\Step" + ++cnt + ".bmp");
+                            writeFile("Input\\Steps\\Step" + ++cnt + ".bmp");
                      }
                  }
              }
          }
          return  "Circles : " + listCircles.size() +" Rectangles : " + listRect.size();
      }
-
-    public int getRecCnt ()
-    {
-        return listRect.size();
-    }
-    public int getCirclCnt ()
-    {
-        return listCircles.size();
-    }
-
 
     private Point findLeftUpPointFigure(int x, int y)
     {
@@ -187,7 +172,7 @@ public class Recognizer {
         int centerY = 0;
         int radius = -1;
 
-        while(getColor(leftUpX + 1, leftUpY).equals(figureColor))
+        while(getColor(leftUpX + 1, leftUpY).equals(figureColor)) // особености прорисовки круга
             leftUpX ++ ;
 
         for (int i = leftUpY; i < _image.getHeight() ; i++) {
@@ -196,13 +181,10 @@ public class Recognizer {
             else
                 break;
         }
-
         radius = diameter /2;
-        if(diameter %radius == 1 && false)
-            throw new IllegalArgumentException("diam % rad == 1 !!!!");
-
         int rightVertical = 0;
         int leftVertical = 0;
+
         for (int i = leftUpX, y = leftUpY + radius; i < _image.getWidth(); i++) {
             if(getColor(i,y).equals(figureColor))
                 rightVertical ++ ;

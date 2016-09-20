@@ -2,7 +2,6 @@ package com.company;
 
 import com.company.Figures.Circle;
 import com.company.Figures.Rect;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -21,11 +20,8 @@ public class TestInputDrawer {
    // private String _fileName = "TestInput.bmp";
     private boolean soutON = true;
 
-
-    private ArrayList<Circle> circles = new ArrayList<>();
     private int _widthImage;
     private int _heightImage;
-
 
     private final int MaxRadius = 150;
     private final int MinRadius = 10;
@@ -37,11 +33,9 @@ public class TestInputDrawer {
     {
         soutON = value;
     }
+    public BufferedImage getImage()
+    {return _image;}
 
-    public ArrayList<Circle> getListC()
-    {
-        return circles;
-    }
 
     public TestInputDrawer(int width, int height)
     {
@@ -57,7 +51,6 @@ public class TestInputDrawer {
     {
         _graphic.setColor(_backColor);
         _graphic.fillRect(0, 0, _widthImage - 1, _heightImage - 1);
-     //   _graphic.dispose();
     }
 
     ///рисует случайные квадраты и круги, которые не пересикаются между сосбой
@@ -69,7 +62,6 @@ public class TestInputDrawer {
 
         drawRandCyrcles(cntCyrcles, listCircles, listRect);
         drawRandRect(cntRectangles, listCircles, listRect);
-        this.circles = listCircles;
     }
 
     private void drawRandCyrcles(int cnt, ArrayList<Circle> listCircles, ArrayList<Rect> listRect)
@@ -199,9 +191,6 @@ public class TestInputDrawer {
         }
 
     }
-
-
-
 
     private boolean isCrossAndereCyrcles(Point center, int radius)
     {

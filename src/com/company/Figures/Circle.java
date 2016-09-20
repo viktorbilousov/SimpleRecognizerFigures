@@ -7,20 +7,16 @@ import java.awt.*;
  */
 public class Circle extends Figures {
 
-
     private int centerX;
     private int centerY;
-
     private int radius;
 
     public int getCenterX() {
         return centerX;
     }
-
     public int getCenterY() {
         return centerY;
     }
-
     public int getRadius() {
         return radius;
     }
@@ -64,7 +60,7 @@ public class Circle extends Figures {
         if(newX < 0 )
             newX = 0;
         if(newY < 0 )
-            newX = 0;
+            newY = 0;
 
         Rect bigRect = new Rect(newX,newY,newW, newH);
         if(bigRect.isPointInside(centerCircle))

@@ -1,7 +1,4 @@
 package com.company.Figures;
-
-import org.w3c.dom.css.Rect;
-
 import java.awt.*;
 
 /**
